@@ -1,5 +1,5 @@
 import React from 'react'
-const Header = () => {
+const Header = (props) => {
     return (
         <div className="row justify-content-center">
             <div className="col-auto">
