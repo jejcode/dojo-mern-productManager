@@ -1,20 +1,8 @@
-import React, {useEffect} from 'react'
-import axios from 'axios'
+import React from 'react'
 import {Link} from 'react-router-dom'
 
 const ProductList = (props) => {
-    const {products, setProducts} = props
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/products')
-            .then((res) => {
-                console.log(res.data)
-                setProducts(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [products])
+    const {products} = props
 
     return (
         <div className="mt-4 row justify-content-center">

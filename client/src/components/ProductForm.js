@@ -17,6 +17,7 @@ const ProductForm = (props) => {
             description
         })
             .then( res => {
+                console.log(res)
                 setProducts([...products,res.data])
                 setTitle('')
                 setPrice('')
