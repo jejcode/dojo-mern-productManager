@@ -4,11 +4,23 @@ module.exports = {
     findAllProducts : (req, res) => {
         Product.find()
             .then(allProducts => {
-                res.json({ products: allProducts })
+                res.json(allProducts)
             })
             .catch(err => {
                 res.json({ message: 'Something went wrong.', error: err})
             })
+    },
+
+    findProduct : (req, res) => {
+        Product.findOne({_id: req.params.id})
+        .then( product => {
+            console.log(product)
+            res.json(product)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
     },
 
     createOneProduct : (req,res) => {
