@@ -31,6 +31,22 @@ module.exports = {
             .catch(err => {
                 res.json({message: "Something went wrong.", error: err})
             })
+    },
+
+    updateProduct : (req,res) => {
+        Product.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
+            .then( updatedProduct => {
+                res.json(updatedProduct)
+            })
+            .catch(err => {
+                res.json({message: "Something went wrong.", error: err})
+            })
+    },
+
+    deleteProduct : (req, res) => {
+        Product.findByIdAndDelete({_id: req.params.id})
+            .then(deleteConfirmation => res.json(deleteConfirmation))
+            .catch(err => response.json(err))
     }
     
 }

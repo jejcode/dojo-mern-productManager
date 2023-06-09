@@ -1,8 +1,20 @@
 import React from 'react'
+import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 const ProductList = (props) => {
-    const {products} = props
+    const {removeFromDom, products, setProducts} = props
+
+    const deleteProduct = (productId) => {
+        axios.delete(`http://localhost:8000/api/product/${productId}`)
+            .then(res => {
+                //axios deletes the document from the database, but it still needs to be removed
+                // from the DOM, or it needs to be removed from the display
+                removeFromDom(productId)
+            })
+            .catch( err => console.log(err))
+
+    }
 
     return (
         <div className="mt-4 row justify-content-center">
@@ -11,8 +23,13 @@ const ProductList = (props) => {
             {
                 products.map((product, index) => {
                     return (
-                        <div key={index}>
+                        <div key={index} className="mb-2">
                             <Link to={`/products/${product._id}`}>{product.title}</Link>
+                            <span className="mx-1">|</span>   
+                            <Link to={`/products/edit/${product._id}`}>Edit</Link>
+                            <span className="mx-1">|</span>   
+                            <button className="btn btn-sm btn-outline-danger mx-1" onClick={(e) => {deleteProduct(product._id)}}>Delete</button>
+                            
                         </div>
                     )
                 })

@@ -3,9 +3,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './views/Main';
 import ProductDetail from './components/ProductDetail';
-
-// import ProductForm from './components/ProductForm'
-// import Header from './components/Header'
+import Update from './components/Update';
 
 function App() {
   return (
@@ -14,6 +12,7 @@ function App() {
         <Routes>
           <Route element={<Main />} path='/products' default/>
           <Route element={<ProductDetail />} path='/products/:id' />
+          <Route element={<Update />} path='/products/edit/:id' />
         </Routes>
       </BrowserRouter>
     </div>
