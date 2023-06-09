@@ -1,20 +1,21 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import Header from '../components/Header'
 import ProductForm from '../components/ProductForm'
 import ProductList from '../components/ProductList'
+import { getProducts } from '../services/product-service'
 
-const Main = (props) => {
+const Main = () => {
     const [products, setProducts] = useState([])
 
     const removeFromDom = productId => {
         setProducts(products.filter(product => product._id !== productId))
     }
     useEffect(() => {
-        axios.get('http://localhost:8000/api/products')
-            .then((res) => {
-                console.log(res.data)
-                setProducts(res.data)
+        getProducts()
+            .then(products => {
+                console.log(products)
+                setProducts(products)
             })
             .catch(err => {
                 console.log(err)

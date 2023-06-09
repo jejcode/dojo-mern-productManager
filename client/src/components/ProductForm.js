@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
+import { createProduct } from '../services/product-service'
 
 const ProductForm = (props) => {
     const {products, setProducts} = props
@@ -11,14 +12,10 @@ const ProductForm = (props) => {
     const handleOnSubmit = (e) => {
         e.preventDefault()
 
-        axios.post('http://localhost:8000/api/product', {
-            title,
-            price,
-            description
-        })
-            .then( res => {
-                console.log(res)
-                setProducts([...products,res.data])
+        createProduct({title,price,description})
+            .then( newProduct => {
+                console.log(newProduct)
+                setProducts([newProduct,...products])
                 setTitle('')
                 setPrice('')
                 setDescription('')

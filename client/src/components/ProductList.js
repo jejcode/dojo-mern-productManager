@@ -1,12 +1,12 @@
 import React from 'react'
-import axios from 'axios'
 import {Link} from 'react-router-dom'
+import { deleteProductById} from '../services/product-service'
 
 const ProductList = (props) => {
-    const {removeFromDom, products, setProducts} = props
+    const {removeFromDom, products} = props
 
     const deleteProduct = (productId) => {
-        axios.delete(`http://localhost:8000/api/product/${productId}`)
+        deleteProductById(productId)
             .then(res => {
                 //axios deletes the document from the database, but it still needs to be removed
                 // from the DOM, or it needs to be removed from the display

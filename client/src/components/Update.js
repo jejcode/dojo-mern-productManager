@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import { useNavigate,useParams } from 'react-router-dom'
+import { getOneProduct, updateOneProduct } from '../services/product-service'
 
 
 const Update = (props) => {
@@ -11,24 +12,26 @@ const Update = (props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/product/${id}`)
-            .then( res => {
-                setTitle(res.data.title)
-                setPrice(res.data.price)
-                setDescription(res.data.description)
+        // axios.get(`http://localhost:8000/api/product/${id}`)
+        getOneProduct(id)
+            .then( product => {
+                setTitle(product.title)
+                setPrice(product.price)
+                setDescription(product.description)
             })
             .catch( err => console.log(err))
     }, [])
 
     const updateProduct = (e) => {
         e.preventDefault()
-        axios.patch(`http://localhost:8000/api/product/${id}`, {
-            title,
-            price,
-            description
-        })
-            .then( res => {
-                console.log(res)
+        // axios.patch(`http://localhost:8000/api/product/${id}`, {
+        //     title,
+        //     price,
+        //     description
+        // })
+        updateOneProduct(id, {title,price,description})
+            .then( updatedProduct => {
+                console.log(updatedProduct)
                 navigate('/products')
             })
             .catch( err => console.log(err))
