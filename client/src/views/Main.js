@@ -3,13 +3,17 @@ import React, {useState, useEffect} from 'react'
 import Header from '../components/Header'
 import ProductForm from '../components/ProductForm'
 import ProductList from '../components/ProductList'
-import { getProducts } from '../services/product-service'
+import { getProducts, deleteProductById } from '../services/product-service'
 
 const Main = () => {
     const [products, setProducts] = useState([])
 
     const removeFromDom = productId => {
-        setProducts(products.filter(product => product._id !== productId))
+        deleteProductById(productId)
+            .then(res => {
+                setProducts(products.filter(product => product._id !== productId))
+
+            })
     }
     useEffect(() => {
         getProducts()

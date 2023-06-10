@@ -9,13 +9,11 @@ const ProductDetail = (props) => {
     const navigate = useNavigate()
 
     const deleteProduct = (productId) => {
-        // axios.delete(`http://localhost:8000/api/product/${productId}`)
         deleteProductById(productId)
             .then(res => navigate('/products'))
             .catch(err => console.log(err))
     }
     useEffect(() => {
-        // axios.get(`http://localhost:8000/api/product/${id}`)
         getOneProduct(id)
             .then( oneProduct => {
                 setProduct(oneProduct)

@@ -24,11 +24,6 @@ const UpdateProduct = (props) => {
 
     const updateProduct = (e) => {
         e.preventDefault()
-        // axios.patch(`http://localhost:8000/api/product/${id}`, {
-        //     title,
-        //     price,
-        //     description
-        // })
         updateOneProduct(id, {title,price,description})
             .then( updatedProduct => {
                 console.log(updatedProduct)
