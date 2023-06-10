@@ -4,7 +4,7 @@ import { useNavigate,useParams } from 'react-router-dom'
 import { getOneProduct, updateOneProduct } from '../services/product-service'
 
 
-const Update = (props) => {
+const UpdateProduct = (props) => {
     const {id} = useParams()
     const [title, setTitle] = useState('')
     const [price, setPrice] = useState('')
@@ -61,4 +61,4 @@ const Update = (props) => {
     )
 }
 
-export default Update
+export default UpdateProduct
