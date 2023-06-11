@@ -3,18 +3,11 @@ import React, {useState, useEffect} from 'react'
 import Header from '../components/Header'
 import ProductForm from '../components/ProductForm'
 import ProductList from '../components/ProductList'
-import { getProducts, deleteProductById } from '../services/product-service'
+import { getProducts, deleteProductById, createProduct } from '../services/product-service'
 
 const Main = () => {
     const [products, setProducts] = useState([])
 
-    const removeFromDom = productId => {
-        deleteProductById(productId)
-            .then(res => {
-                setProducts(products.filter(product => product._id !== productId))
-
-            })
-    }
     useEffect(() => {
         getProducts()
             .then(products => {
@@ -25,10 +18,29 @@ const Main = () => {
                 console.log(err)
             })
     }, [])
+
+    const removeFromDom = productId => {
+        deleteProductById(productId)
+            .then(res => {
+                setProducts(products.filter(product => product._id !== productId))
+
+            })
+    }
+
+    const createNewProduct = productParams => {
+        createProduct(productParams)
+            .then( newProduct => {
+                console.log(newProduct)
+                setProducts([newProduct,...products])
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div>
             <Header />
-            <ProductForm products={products} setProducts={setProducts}/>
+            <ProductForm onSubmitProp={createNewProduct} initialTitle="" initialPrice="" initialDescription=""/>
             <ProductList products={products} setProducts={setProducts} removeFromDom={removeFromDom}/>
         </div>
     )

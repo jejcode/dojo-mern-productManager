@@ -1,28 +1,28 @@
 import React, { useState } from 'react'
 // import axios from 'axios'
-import { createProduct } from '../services/product-service'
+// import { createProduct } from '../services/product-service'
 
 const ProductForm = (props) => {
-    const {products, setProducts} = props
+    const {onSubmitProp, initialTitle, initialPrice, initialDescription} = props
     
-    const [title, setTitle] = useState('')
-    const [price, setPrice] = useState('')
-    const [description, setDescription] = useState('')
+    const [title, setTitle] = useState(initialTitle)
+    const [price, setPrice] = useState(initialPrice)
+    const [description, setDescription] = useState(initialDescription)
 
     const handleOnSubmit = (e) => {
         e.preventDefault()
-
-        createProduct({title,price,description})
-            .then( newProduct => {
-                console.log(newProduct)
-                setProducts([newProduct,...products])
-                setTitle('')
-                setPrice('')
-                setDescription('')
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        onSubmitProp({title, price, description})
+        // createProduct({title,price,description})
+        //     .then( newProduct => {
+        //         console.log(newProduct)
+        //         setProducts([newProduct,...products])
+        //         setTitle('')
+        //         setPrice('')
+        //         setDescription('')
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
     }
 
     return (
