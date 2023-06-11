@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 
 const ProductForm = (props) => {
     const {onSubmitProp, initialTitle, initialPrice, initialDescription} = props
-    
     const [title, setTitle] = useState(initialTitle)
     const [price, setPrice] = useState(initialPrice)
     const [description, setDescription] = useState(initialDescription)
@@ -12,22 +11,11 @@ const ProductForm = (props) => {
     const handleOnSubmit = (e) => {
         e.preventDefault()
         onSubmitProp({title, price, description})
-        // createProduct({title,price,description})
-        //     .then( newProduct => {
-        //         console.log(newProduct)
-        //         setProducts([newProduct,...products])
-        //         setTitle('')
-        //         setPrice('')
-        //         setDescription('')
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
     }
 
     return (
         <div className="row justify-content-center">
-            <div className="col-2">
+            <div className="col-auto">
                 <form onSubmit={ handleOnSubmit }>
                     <div>
                         <label className="form-label" htmlFor="title">Title:</label>
@@ -41,7 +29,7 @@ const ProductForm = (props) => {
                         <label className="form-label" htmlFor="description">Description:</label>
                         <input className="form-control mb-2" type="text" name="description" id="description" onChange={ (e) => {setDescription(e.target.value)}} value={ description }/>
                     </div>
-                    <input className="btn btn-primary mt-2" type="submit" value="Add Product" />
+                    <input className="btn btn-primary mt-2" type="submit" value="Save Product" />
                 </form>
             </div>
         </div>
