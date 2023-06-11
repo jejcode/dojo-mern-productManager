@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from 'react'
-// import axios from 'axios'
 import {useParams, useNavigate} from 'react-router-dom'
-import { deleteProductById,getOneProduct } from '../services/product-service'
+import { getOneProduct } from '../services/product-service'
+import DeleteButton from './DeleteButton'
 
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({})
     const {id} = useParams()
     const navigate = useNavigate()
 
-    const deleteProduct = (productId) => {
-        deleteProductById(productId)
-            .then(res => navigate('/products'))
-            .catch(err => console.log(err))
+    const redirectAfterDelete = () => {
+        navigate('/products')
     }
     useEffect(() => {
         getOneProduct(id)
@@ -27,7 +25,8 @@ const ProductDetail = (props) => {
                 <h3>{product.title}</h3>
                 <p>Price: ${product.price}</p>
                 <p>Description: {product.description}</p>
-                <button className="btn btn-sm btn-outline-danger mx-1" onClick={(e) => {deleteProduct(product._id)}}>Delete</button>
+                {/* <button className="btn btn-sm btn-outline-danger mx-1" onClick={(e) => {deleteProduct(product._id)}}>Delete</button> */}
+                <DeleteButton productId={product._id} successCallback={redirectAfterDelete} />
             </div>
         </div>
     )

@@ -5,7 +5,9 @@ const DeleteButton = (props) => {
     const {productId, successCallback} = props
     const deleteProduct = () => {
         deleteProductById(productId)
-        successCallback(productId)
+            .then(res => {
+                successCallback(productId)
+            })
     }
 
     return (

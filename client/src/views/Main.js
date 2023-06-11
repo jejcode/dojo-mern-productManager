@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Header from '../components/Header'
 import ProductForm from '../components/ProductForm'
 import ProductList from '../components/ProductList'
-import { getProducts, deleteProductById, createProduct } from '../services/product-service'
+import { getProducts, createProduct } from '../services/product-service'
 
 const Main = () => {
     const [products, setProducts] = useState([])
@@ -19,19 +19,11 @@ const Main = () => {
             })
     }, [])
 
-    const removeFromDom = productId => {
-        deleteProductById(productId)
-            .then(res => {
-                setProducts(products.filter(product => product._id !== productId))
-
-            })
-    }
-
     const createNewProduct = productParams => {
         createProduct(productParams)
             .then( newProduct => {
                 console.log(newProduct)
-                setProducts([newProduct,...products])
+                setProducts([...products, newProduct])
             })
             .catch(err => {
                 console.log(err)
@@ -41,7 +33,7 @@ const Main = () => {
         <div>
             <Header />
             <ProductForm onSubmitProp={createNewProduct} initialTitle="" initialPrice="" initialDescription=""/>
-            <ProductList products={products} setProducts={setProducts} removeFromDom={removeFromDom}/>
+            <ProductList products={products} setProducts={setProducts} />
         </div>
     )
 }
