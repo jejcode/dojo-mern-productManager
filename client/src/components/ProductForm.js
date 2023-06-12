@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-// import axios from 'axios'
-// import { createProduct } from '../services/product-service'
 
 const ProductForm = (props) => {
     const {onSubmitProp, initialTitle, initialPrice, initialDescription} = props
@@ -11,6 +9,10 @@ const ProductForm = (props) => {
     const handleOnSubmit = (e) => {
         e.preventDefault()
         onSubmitProp({title, price, description})
+        // How can I get the following to only execute after onSubmitProp finishes? .then give an error!
+        setTitle('')
+        setPrice('')
+        setDescription('')
     }
 
     return (
